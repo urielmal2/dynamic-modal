@@ -12,23 +12,25 @@ export class ModalInjectorService {
     private injector: Injector,
 ) {}
 
-  openModal(component = DynamicModalComponent) {
+  openModal(modalData, component = DynamicModalComponent) {
     // 1. Create a component reference from the component
-    this.componentRef = this.componentFactoryResolver
-      .resolveComponentFactory(component)
-      .create(this.injector);
+    this.componentRef = this.componentFactoryResolver.resolveComponentFactory(component).create(this.injector);
+    console.log(this.componentRef)
 
     // 2. Attach component to the appRef so that it's inside the ng component tree
     this.appRef.attachView(this.componentRef.hostView);
 
     // 3. Get DOM element from component
-    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement;
+    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
-    // 4. Append DOM element to the body
-    document.body.appendChild(domElem);
-
+    // 4. Listen to close modal event
     this.closeModalListener();
+
+    // 5. Assign modal data
+    this.componentRef.instance.modalData = modalData;
+
+    // 6. Append DOM element to the body
+    document.body.appendChild(domElem);
   }
 
   closeModalListener() {

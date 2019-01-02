@@ -15,6 +15,11 @@ export class AppComponent implements OnInit {
   }
 
   openModal() {
-    this.modalInjectorService.openModal();
+    const modalData = {
+      headerContent: 'Modal Header',
+      bodyContent: 'Modal Body',
+      footerContent: 'Modal Footer'
+  };
+    this.modalInjectorService.openModal(modalData);
   }
 }
