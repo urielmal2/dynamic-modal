@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalInjectorService} from './modal-injector.service';
+import {ModalInjectorService} from './dynamic-modal/modal-injector.service';
 
 @Component({
   selector: 'app-root',

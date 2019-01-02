@@ -1,5 +1,5 @@
-import {ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector} from '@angular/core';
-import {DynamicModalComponent} from './dynamic-modal/dynamic-modal.component';
+import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { DynamicModalComponent } from './dynamic-modal.component';
 
 @Injectable()
 export class ModalInjectorService {
@@ -9,9 +9,8 @@ export class ModalInjectorService {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
-    private injector: Injector
-  ) {
-  }
+    private injector: Injector,
+) {}
 
   openModal(component = DynamicModalComponent) {
     // 1. Create a component reference from the component
@@ -28,6 +27,16 @@ export class ModalInjectorService {
 
     // 4. Append DOM element to the body
     document.body.appendChild(domElem);
+
+    this.closeModalListener();
+  }
+
+  closeModalListener() {
+    this.componentRef.instance.modalClose.subscribe((isCloseModal) => {
+      if (isCloseModal) {
+        this.closeModal();
+      }
+    });
   }
 
   closeModal() {

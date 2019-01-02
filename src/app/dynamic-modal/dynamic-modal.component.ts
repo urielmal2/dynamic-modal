@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-modal',
   templateUrl: './dynamic-modal.component.html',
-  styleUrls: ['./dynamic-modal.component.css']
+  styleUrls: ['./dynamic-modal.component.css'],
 })
-export class DynamicModalComponent implements OnInit {
 
-  // constructor(private modalInjectorService: ModalInjectorService) { }
-  ngOnInit() {
+export class DynamicModalComponent {
+
+  @Output() modalClose = new EventEmitter();
+
+  closeModal() {
+    this.modalClose.emit(true);
   }
 
-  closeModal(event) {
-    // this.modalInjectorService.closeModal();
   }
-
-}
