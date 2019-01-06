@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicModalService} from './dynamic-modal/dynamic-modal.service';
+import {DynamicModalService} from './dynamic-modal/components/dynamic-modal/dynamic-modal.service';
+import {TempComponentComponent} from './temp-component/temp-component.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   openModal() {
     const modalData = {
-      headerContent: 'Modal Header',
+      headerContent: '<h1>Modal Header</h1>',
       bodyContent: 'Modal Body',
       footerContent: 'Modal Footer'
   };

@@ -3,16 +3,16 @@
 
     <div class="modal-header">
       <div class="close-modal" (click)="closeModal()">X</div>
-      <span>{{modalData?.headerContent}}</span>
+      <span [innerHTML]="modalContent.headerContent"></span>
     </div>
 
     <div class="modal-body" *ngIf="modalData?.bodyContent">
       <ng-content></ng-content>
-      {{modalData?.bodyContent}}
+      <span [innerHTML]="modalContent.bodyContent"></span>
     </div>
 
     <div class="modal-footer" *ngIf="modalData?.footerContent">
-      {{modalData?.footerContent}}
+      <span [innerHTML]="modalContent.footerContent"></span>
     </div>
   </div>
 

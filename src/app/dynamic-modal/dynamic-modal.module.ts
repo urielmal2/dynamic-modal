@@ -1,17 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.component';
+import { DynamicModalService } from './components/dynamic-modal/dynamic-modal.service';
+import { TemplateModalComponent } from './components/template-modal/template-modal.component';
 
-import {ModuleWithProviders, NgModule} from '@angular/core';
-import { DynamicModalComponent } from './component/dynamic-modal.component';
-import { DynamicModalService } from './dynamic-modal.service';
 
-const components = [DynamicModalComponent];
+const components = [DynamicModalComponent, TemplateModalComponent];
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [
+    BrowserModule
+  ],
   declarations: components,
-  entryComponents: components,
-  providers: [DynamicModalService],
-  exports: components
+  exports: components,
+  entryComponents: [
+    DynamicModalComponent
+  ],
+  providers: [
+    DynamicModalService
+  ]
 })
 
 export class DynamicModalModule {
