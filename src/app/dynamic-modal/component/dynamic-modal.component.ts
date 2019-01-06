@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {IModalData} from './modal-data.interface';
+import {IModalData} from '../modal-data.interface';
 
 @Component({
   selector: 'app-dynamic-modal',
@@ -12,8 +12,8 @@ export class DynamicModalComponent {
   @Input() modalMetaData;
 
   _modalData;
-  get modalData(): IModalData {return this._modalData;}
-  @Input() set modalData(value: IModalData) {this._modalData = value;}
+  get modalData(): IModalData { return this._modalData; }
+  @Input() set modalData(value: IModalData) { this._modalData = value; }
 
   @Output() modalClose = new EventEmitter();
 

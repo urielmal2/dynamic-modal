@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalInjectorService} from './dynamic-modal/modal-injector.service';
+import {DynamicModalService} from './dynamic-modal/dynamic-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import {ModalInjectorService} from './dynamic-modal/modal-injector.service';
 
 export class AppComponent implements OnInit {
 
-  constructor (private modalInjectorService: ModalInjectorService) {}
+  constructor (private modalInjectorService: DynamicModalService) {}
 
   ngOnInit() {
   }

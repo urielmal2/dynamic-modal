@@ -1,8 +1,8 @@
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
-import { DynamicModalComponent } from './dynamic-modal.component';
+import { DynamicModalComponent } from './component/dynamic-modal.component';
 
 @Injectable()
-export class ModalInjectorService {
+export class DynamicModalService {
 
   componentRef;
 
@@ -15,7 +15,6 @@ export class ModalInjectorService {
   openModal(modalData, component = DynamicModalComponent) {
     // 1. Create a component reference from the component
     this.componentRef = this.componentFactoryResolver.resolveComponentFactory(component).create(this.injector);
-    console.log(this.componentRef)
 
     // 2. Attach component to the appRef so that it's inside the ng component tree
     this.appRef.attachView(this.componentRef.hostView);
@@ -24,7 +23,7 @@ export class ModalInjectorService {
     const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
     // 4. Listen to close modal event
-    this.closeModalListener();
+    this.ModalCloseListener();
 
     // 5. Assign modal data
     this.componentRef.instance.modalData = modalData;
@@ -33,10 +32,11 @@ export class ModalInjectorService {
     document.body.appendChild(domElem);
   }
 
-  closeModalListener() {
-    this.componentRef.instance.modalClose.subscribe((isCloseModal) => {
+  ModalCloseListener() {
+   const modalCloseSubscription = this.componentRef.instance.modalClose.subscribe((isCloseModal) => {
       if (isCloseModal) {
         this.closeModal();
+        modalCloseSubscription.unsubscribe();
       }
     });
   }
