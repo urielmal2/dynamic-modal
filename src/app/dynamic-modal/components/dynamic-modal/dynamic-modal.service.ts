@@ -1,35 +1,26 @@
-import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
 import { DynamicModalComponent } from './dynamic-modal.component';
+import {BaseComponentInstantiate} from './base-component-instantiate';
 
 @Injectable()
-export class DynamicModalService {
-
-  componentRef;
+export class DynamicModalService extends BaseComponentInstantiate {
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private appRef: ApplicationRef,
-    private injector: Injector,
-) {}
+    protected componentFactoryResolver: ComponentFactoryResolver,
+    protected appRef: ApplicationRef,
+    protected injector: Injector,
+  ) {
+  super(componentFactoryResolver, appRef, injector);
+}
 
   openModal(modalData) {
-    // 1. Create a components reference from the components
-    this.componentRef = this.componentFactoryResolver.resolveComponentFactory(DynamicModalComponent).create(this.injector);
-
-    // 2. Attach components to the appRef so that it's inside the ng components tree
-    this.appRef.attachView(this.componentRef.hostView);
-
-    // 3. Get DOM element from components
-    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-
-    // 4. Listen to close modal event
+    this.instantiateComponent(DynamicModalComponent, 'body', modalData);
     this.ModalCloseListener();
+  }
 
-    // 5. Assign modal data
-    this.componentRef.instance.modalData = modalData;
-
-    // 6. Append DOM element to the body
-    document.body.appendChild(domElem);
+  closeModal() {
+    this.appRef.detachView(this.componentRef.hostView);
+    this.componentRef.destroy();
   }
 
   ModalCloseListener() {
@@ -41,8 +32,4 @@ export class DynamicModalService {
     });
   }
 
-  closeModal() {
-    this.appRef.detachView(this.componentRef.hostView);
-    this.componentRef.destroy();
-  }
 }

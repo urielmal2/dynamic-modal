@@ -21,6 +21,6 @@ export class AppComponent implements OnInit {
       bodyContent: 'Modal Body',
       footerContent: 'Modal Footer'
   };
-    this.modalInjectorService.openModal(modalData);
+    this.modalInjectorService.openModal(TempComponentComponent);
   }
 }

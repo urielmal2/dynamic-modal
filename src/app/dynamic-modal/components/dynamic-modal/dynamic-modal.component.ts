@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ApplicationRef, Component, ComponentFactoryResolver, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
 import {IModalData} from '../../modal-data.interface';
 import {DomSanitizer} from '@angular/platform-browser';
-import {isFunction} from 'lodash';
+import {isFunction, isUndefined} from 'lodash';
+import {BaseComponentInstantiate} from './base-component-instantiate';
 
 @Component({
   selector: 'app-dynamic-modal',
@@ -9,7 +10,7 @@ import {isFunction} from 'lodash';
   styleUrls: ['./dynamic-modal.component.scss'],
 })
 
-export class DynamicModalComponent implements OnInit {
+export class DynamicModalComponent extends BaseComponentInstantiate implements OnInit {
 
   @Input() modalMetaData;
   _modalData;
@@ -18,18 +19,30 @@ export class DynamicModalComponent implements OnInit {
   }
 
   @Input() set modalData(value) {
-    this._modalData = value;
+    if (isUndefined(this.isComponentModalData)) {
+      this._modalData = value;
+      this.isComponentModalData = isFunction(this.modalData);
+    }
   }
 
   @Output() modalClose = new EventEmitter();
   modalContent: IModalData = {} as IModalData;
   isComponentModalData: boolean;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(
+    protected componentFactoryResolver: ComponentFactoryResolver,
+    protected appRef: ApplicationRef,
+    protected injector: Injector,
+    private sanitizer: DomSanitizer
+  ) {
+    super(componentFactoryResolver, appRef, injector);
+  }
 
   ngOnInit() {
-    if (!isFunction(this.modalData)) {
+    if (!this.isComponentModalData) {
       this.anabelHtmlOfString();
+    } else {
+      this.instantiateComponent(this.modalData, 'app-dynamic-modal .modal-content');
     }
   }
 

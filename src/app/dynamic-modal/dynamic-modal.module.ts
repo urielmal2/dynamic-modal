@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.component';
 import { DynamicModalService } from './components/dynamic-modal/dynamic-modal.service';
-import { TemplateModalComponent } from './components/template-modal/template-modal.component';
+import {TempComponentComponent} from '../temp-component/temp-component.component';
 
 
-const components = [DynamicModalComponent, TemplateModalComponent];
+const components = [DynamicModalComponent];
 
 @NgModule({
   imports: [
@@ -14,7 +14,8 @@ const components = [DynamicModalComponent, TemplateModalComponent];
   declarations: components,
   exports: components,
   entryComponents: [
-    DynamicModalComponent
+    DynamicModalComponent,
+    TempComponentComponent
   ],
   providers: [
     DynamicModalService

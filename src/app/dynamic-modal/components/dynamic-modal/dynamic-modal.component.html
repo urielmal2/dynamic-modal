@@ -1,19 +1,24 @@
 <div class="modal-wrapper">
-  <div class="modal-contant">
+  <div class="modal-content">
 
-    <div class="modal-header">
-      <div class="close-modal" (click)="closeModal()">X</div>
-      <span [innerHTML]="modalContent.headerContent"></span>
+    <div class="close-modal" (click)="closeModal()" *ngIf="isComponentModalData">X</div>
+
+
+    <div class="dialog-modal" *ngIf="!isComponentModalData">
+      <div class="modal-header">
+        <div class="close-modal" (click)="closeModal()">X</div>
+        <span [innerHTML]="modalContent.headerContent"></span>
+      </div>
+
+      <div class="modal-body" *ngIf="modalData?.bodyContent">
+        <span [innerHTML]="modalContent.bodyContent"></span>
+      </div>
+
+      <div class="modal-footer" *ngIf="modalData?.footerContent">
+        <span [innerHTML]="modalContent.footerContent"></span>
+      </div>
     </div>
 
-    <div class="modal-body" *ngIf="modalData?.bodyContent">
-      <ng-content></ng-content>
-      <span [innerHTML]="modalContent.bodyContent"></span>
-    </div>
-
-    <div class="modal-footer" *ngIf="modalData?.footerContent">
-      <span [innerHTML]="modalContent.footerContent"></span>
-    </div>
   </div>
 
 </div>
