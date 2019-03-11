@@ -1,0 +1,96 @@
+:host {
+	min-width: 400px;
+	position: fixed;
+	top: 0;
+	right: 50%;
+	z-index: 999;
+	transform: translate(50%, 0);
+
+	.wrapper {
+		border-radius: 3px;
+	}
+
+	.modal-content {
+		background-color: white;
+
+		&.modal-component-container {
+			background-color: transparent;
+		}
+
+		.main-wrapper {
+			font-size: 18px;
+			padding: 10px 0;
+			width: 96%;
+			margin: auto;
+		}
+	}
+
+	header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.header-wrapper{
+			width: 96%;
+			min-height: 44px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.header-title, .header-title * {
+				margin: 0;
+				font-size: 16px;
+				font-weight: normal;
+				color: white;
+			}
+
+			.close-modal {
+				width: 15px;
+				height: 15px;
+				background: url(/assets/close.ico) no-repeat center;
+				background-size: contain;
+				cursor: pointer;
+			}
+		}
+	}
+
+
+
+	footer {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+		min-height: 68px;
+		background-color: #EAEDEF;
+
+		> * {
+			display: table;
+			margin: auto;
+		}
+
+
+	}
+}
+
+::ng-deep {
+	app-basic-button {
+		button {
+			min-width: 164px !important;
+			min-height: 35px !important;
+			margin-right: 17px !important;
+			font-size: 16px !important;
+			text-align: center !important;
+			color: #ffffff !important;
+			border: none !important;
+			border-radius: 100px !important;
+		}
+
+		&:last-child {
+			button{
+				margin-right: 0 !important;
+			}
+		}
+	}
+
+}

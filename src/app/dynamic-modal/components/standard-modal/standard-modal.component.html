@@ -1,0 +1,29 @@
+<div class="wrapper">
+	<header *ngIf="isHeader" style.background="{{headerColor}}">
+		<div class="header-wrapper">
+			<span class="header-title" [innerHTML]="modalHeaderTextOrHtml"></span>
+			<div class="close-modal" (click)="closeModal()"></div>
+		</div>
+	</header>
+
+	<main class="modal-content">
+		<div class="main-wrapper">
+			<span [innerHTML]="modalMainTextOrHtml"></span>
+			<ng-content></ng-content>
+		</div>
+	</main>
+
+	<footer *ngIf="isFooter">
+		<div class="buttons-container">
+			<app-basic-button
+				*ngFor="let button of buttons"
+				(buttonClicked)="button.callback($event)"
+				[text]="button.title || 'Click'"
+				[color]="button.buttonType || 'orange'"
+			></app-basic-button>
+		</div>
+		<span [innerHTML]="modalFooterTextOrHtml"></span>
+	</footer>
+</div>
+
+<span id="costume-css-container" [innerHTML]="modalStyleForCostumeHtml" *ngIf="modalStyleForCostumeHtml"></span>
