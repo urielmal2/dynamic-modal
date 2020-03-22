@@ -2,7 +2,7 @@
 	<header *ngIf="isHeader" style.background="{{headerColor}}">
 		<div class="header-wrapper">
 			<span class="header-title" [innerHTML]="modalHeaderTextOrHtml"></span>
-			<div class="close-modal" (click)="closeModal()"></div>
+			<div class="close-modal" (click)="closeModal()">X</div>
 		</div>
 	</header>
 
@@ -15,12 +15,10 @@
 
 	<footer *ngIf="isFooter">
 		<div class="buttons-container">
-			<app-basic-button
+			<button
 				*ngFor="let button of buttons"
-				(buttonClicked)="button.callback($event)"
-				[text]="button.title || 'Click'"
-				[color]="button.buttonType || 'orange'"
-			></app-basic-button>
+				(click)="button.callback($event)"
+			>{{button.title || 'Click'}}</button>
 		</div>
 		<span [innerHTML]="modalFooterTextOrHtml"></span>
 	</footer>

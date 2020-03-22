@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicModalService} from './dynamic-modal/components/dynamic-modal/dynamic-modal.service';
 import {TempComponentComponent} from './temp-component/temp-component.component';
+import {DynamicModalService} from './dynamic-modal/dynamic-modal.service';
+import {BUTTON_TYPES, MODAL_CHILD_COMPONENTS, MODAL_HEADER_BACKGROUND_COLOR} from './dynamic-modal/modals-type-components.enum';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,16 @@ export class AppComponent implements OnInit {
       bodyContent: 'Modal Body',
       footerContent: 'Modal Footer'
   };
-    this.modalInjectorService.openModal(TempComponentComponent);
+
+    const ComponentModalData = {
+      componentModal: {
+        component: TempComponentComponent
+      },
+      modalChildComponent: MODAL_CHILD_COMPONENTS.STANDARD,
+      buttons: [{
+        title: 'Close Modal',
+      }]
+    };
+    this.modalInjectorService.openModal(ComponentModalData);
   }
 }

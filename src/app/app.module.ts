@@ -16,6 +16,7 @@ import { DynamicModalModule } from './dynamic-modal/dynamic-modal.module';
     BrowserModule,
     DynamicModalModule.forRoot()
   ],
+  entryComponents: [TempComponentComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

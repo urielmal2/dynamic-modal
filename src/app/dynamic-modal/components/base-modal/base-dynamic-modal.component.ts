@@ -1,6 +1,6 @@
 import { AfterViewInit, ElementRef, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { map, isEmpty, isArray, isObject, isUndefined } from 'lodash';
+import { map, isEmpty, isArray, isObject, isUndefined, isFunction } from 'lodash';
 import { ButtonSettings, ContentModalData, DynamicModalDate, ModalConfig } from "../../modal-data.interface";
 import { BUTTON_TYPES, MODAL_CHILD_COMPONENTS, MODAL_HEADER_BACKGROUND_COLOR } from "../../modals-type-components.enum";
 
@@ -115,7 +115,9 @@ export class BaseDynamicModalComponent implements OnChanges, AfterViewInit {
 			this.buttons.forEach((button) => {
 				const fn = this.bindToThis && !this.isServiceModal ? button.callback.bind(this.bindToThis) : button.callback;
 				button.callback = event => {
-					fn(event);
+				  if (isFunction(fn)) {
+            fn(event);
+          }
 					return !button.DontCloseModalAfterClick ? this.closeModal() : undefined;
 				};
 			});
