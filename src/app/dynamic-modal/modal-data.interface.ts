@@ -9,22 +9,22 @@ export interface DynamicModalDate {
 }
 
 export interface ContentModalData {
-	modalHeaderTextOrHtml: string;
+	modalHeaderTextOrHtml?: string;
 	modalMainTextOrHtml?: any;
 	modalFooterTextOrHtml?: string;
 	modalStyleForCostumeHtml?: string;
 }
 
 export interface ButtonSettings {
-	title: string;
-	callback: (event?) => any;
+	title?: string;
+	callback?: (event?) => any;
 	buttonType?: BUTTON_TYPES;
 	DontCloseModalAfterClick?: boolean;
 }
 
 interface ModalComponentData {
-	component: Function;
-	componentDataBinding: ComponentDataBinding;
+	component?: Function;
+	componentDataBinding?: ComponentDataBinding;
 }
 
 export interface ComponentDataBinding {
@@ -39,8 +39,8 @@ export interface ModalConfig {
 }
 
 interface ComponentInputs {
-	inputName: string;
-	inputData: any;
+	inputName?: string;
+	inputData?: any;
 }
 
 interface ComponentOutputs {
